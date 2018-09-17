@@ -1,0 +1,6 @@
+".\Objects\STARTUP.obj",
+".\Objects\main.obj",
+".\Objects\system.obj",
+".\Objects\bsp_led.obj" 
+TO ".\Objects\backcall" 
+PRINT(".\Listings\backcall.m51") RAMSIZE(256) 
