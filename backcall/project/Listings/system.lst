@@ -1,4 +1,4 @@
-C51 COMPILER V9.59.0.0   SYSTEM                                                            09/17/2018 15:16:45 PAGE 1   
+C51 COMPILER V9.59.0.0   SYSTEM                                                            09/17/2018 15:45:14 PAGE 1   
 
 
 C51 COMPILER V9.59.0.0, COMPILATION OF MODULE SYSTEM
@@ -16,71 +16,39 @@ line level    source
    6   1        Led_Init();
    7   1      }
    8          
-   9          void Delay_Time(unsigned int timer)
-  10          {
-  11   1        unsigned int i,j;
-  12   1        for(i = timer;i > 0 ; i--)
-  13   1        {
-  14   2          for(j = 200; j > 0 ; j --);
-  15   2        }
-  16   1      }
-  17          
+   9          
+  10          void Delay_Time(unsigned int timer)
+  11          {
+  12   1        unsigned int i,j;
+  13   1        for(i = timer; i > 0; i --)
+  14   1        {
+  15   2          for(j =200; j > 0; j--);
+  16   2        }
+  17   1      }
   18          
-  19          int PrintNum_Open(int n){  
-  20   1         //printf("Test1 is called,the number is %d\n",n); 
-  21   1         Led_Open();
-  22   1        n ++;
-  23   1        return 1;
-  24   1      }
-  25          
-  26          int PrintNum_Close(int n){  
-  27   1         //printf("Test1 is called,the number is %d\n",n); 
-  28   1         Led_Close();
-  29   1        n ++;
-  30   1        return 1;
+  19          void BackCall(unsigned int timer,void (* ptr)(unsigned int))
+  20          {
+  21   1        (* ptr)(timer);
+  22   1      }
+  23          
+  24          
+  25          void System_Handle(void)
+  26          {
+  27   1        Led_Open();
+  28   1        BackCall(5000,Delay_Time);
+  29   1        Led_Close();
+  30   1        BackCall(5000,Delay_Time);
   31   1      }
-  32            
-  33          void ShowNum(int n,void (* ptr)(int)){  
-  34   1         (* ptr)(n);  
-  35   1      }
-  36          
-  37          
-  38          void System_Handle(void)
-  39          {
-  40   1        ShowNum(1000,PrintNum_Open);
-  41   1        Delay_Time(5000);
-  42   1        ShowNum(1000,PrintNum_Close);
-  43   1        Delay_Time(5000);
-  44   1      }
-  45          
-  46          #if 0
-              void BackCall(void (* ptr)())
-              {
-                (* ptr)();
-              }
-              
-              
-              void BackCall(void (* ptr)())
-              {
-C51 COMPILER V9.59.0.0   SYSTEM                                                            09/17/2018 15:16:45 PAGE 2   
-
-                
-              }
-              #endif
-  58          
-  59          
-  60          
-  61          
-  62          
-  63          
+  32          
+  33          
 
 
 MODULE INFORMATION:   STATIC OVERLAYABLE
-   CODE SIZE        =    114    ----
+   CODE SIZE        =     72    ----
    CONSTANT SIZE    =   ----    ----
    XDATA SIZE       =   ----    ----
    PDATA SIZE       =   ----    ----
-   DATA SIZE        =   ----       4
+   DATA SIZE        =   ----    ----
    IDATA SIZE       =   ----    ----
    BIT SIZE         =   ----    ----
 END OF MODULE INFORMATION.
